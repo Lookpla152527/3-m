@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 3 Months Anniversary</title>
+    <style>
+       
+    @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;500&display=swap');
+
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #ffeef2; /* ชมพูอ่อน */
+        font-family: 'Kanit', sans-serif;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    .heart-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+    }
+
+    #gift-page, #pass-page, #message-page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+           /* ตัวกล่องของขวัญแบบแก้เบี้ยวถาวร */
+        .gift-box {
+            width: 200px;
+            height: 200px;
+            background-color: #ff8fa3;
+            position: relative;
+            cursor: pointer;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.3);
+            transition: transform 0.3s;
+            margin-bottom: 30px;
+            
+            /* ใช้ Flex ช่วยจัดกึ่งกลางโบว์ */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gift-box:hover { transform: scale(1.05); }
+
+        /* โบว์แนวตั้ง - ปรับวิธีวางใหม่ */
+        .gift-box::before {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 100%;
+            background-color: #ff4d6d;
+            /* ไม่ใช้ transform แต่ใช้ตำแหน่ง fix กลาง */
+        }
+
+        /* โบว์แนวนอน - ปรับวิธีวางใหม่ */
+        .gift-box::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 40px;
+            background-color: #ff4d6d;
+            /* ไม่ใช้ transform แต่ใช้ตำแหน่ง fix กลาง */
+        }
+
+
+    /* แก้ไขปุ่มให้กลับมาสวยเหมือนเดิม */
+    .btn-open {
+        padding: 12px 35px;
+        background-color: #ff4d6d;
+        color: white;
+        border: none;
+        border-radius: 50px; /* ปรับให้โค้งมนสวยๆ */
+        font-size: 1.1rem;
+        font-family: 'Kanit', sans-serif;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+        transition: background 0.3s;
+    }
+
+    .btn-open:hover {
+        background-color: #ff1a43;
+    }
+
+    input[type="password"] {
+        padding: 12px;
+        font-size: 1.1rem;
+        border: 2px solid #ff8fa3;
+        border-radius: 10px;
+        outline: none;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .message-card {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(255, 143, 163, 0.3);
+        border: 2px solid #ff8fa3;
+        max-width: 300px;
+    }
+
+    h1 { color: #ff4d6d; margin-top: 0; }
+    p { color: #555; line-height: 1.6; }
+    .heart-icon { color: #ff4d6d; font-size: 50px; }
+
+        /* หน้าที่ 2: ใส่รหัส */
+        #pass-page {
+            display: none;
+        }
+
+        input[type="password"] {
+            padding: 10px;
+            font-size: 1.2rem;
+            border: 2px solid #ff8fa3;
+            border-radius: 10px;
+            outline: none;
+            text-align: center;
+        }
+
+        /* หน้าที่ 3: ข้อความ */
+        #message-page {
+            display: none;
+            padding: 20px;
+            max-width: 80%;
+        }
+
+        .message-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 143, 163, 0.3);
+            border: 2px solid #ff8fa3;
+        }
+
+        h1 { color: #ff4d6d; }
+        p { color: #555; line-height: 1.6; }
+
+        .heart-icon {
+            color: #ff4d6d;
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="heart-bg" id="heart-bg"></div>
+
+    <!-- หน้า 1: กล่องของขวัญ -->
+    <div id="gift-page">
+        
+        <h1 class="title">
+            Happy 3 Months 💖
+        </h1>
+        <div class="gift-box" onclick="goToPass()"></div>
+        <button class="btn-open" onclick="goToPass()">กดเปิดกล่องของขวัญ 🎁</button>
+    </div>
+
+    <!-- หน้า 2: ใส่รหัส -->
+    <div id="pass-page">
+        <h2>ใส่รหัสผ่านเพื่อเปิดอ่าน ❤️</h2>
+        <input type="password" id="passwordInput" placeholder="ใส่รหัสที่นี่...">
+        <br><br>
+        <button class="btn-open" onclick="checkPassword()">ตกลง</button>
+    </div>
+
+    <!-- หน้า 3: ข้อความ -->
+    <div id="message-page">
+        <div class="message-card">
+            <div class="heart-icon">❤️</div>
+            <h1>Happy 3rd Month!</h1>
+            <p>
+                สุขสันตต์วันคบรอบ 3 เดือนนะพี่่💖 <br>
+                   มีความสุขมากๆยิ้มเยอะน้าาา<br>
+             ดูแลตัวเองด้วยช่วงนี้หน้าฝนเดี่ยวจะไม่สบาย<br>
+             น้องก็ขอโทษที่บ้างทีอาจทำอะไรที่พี่ไม่ชอบ<br>
+                อย่าพึ่งรีบไปไหนนะอยู่กับน้องไปนานๆนะพี่่<br>
+                
+            </p>
+            <p style="font-weight: bold;">รักพี่ที่สุดเลยยยย💖</p>
+        </div>
+    </div>
+        
+    <script>
+        // สร้างหัวใจลอยในพื้นหลัง
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.style.position = 'absolute';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '100vh';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.color = '#ff4d6d';
+            heart.style.opacity = Math.random();
+            heart.style.transition = 'transform 5s linear, opacity 5s';
+            
+            document.getElementById('heart-bg').appendChild(heart);
+
+            setTimeout(() => {
+                heart.style.transform = `translateY(-110vh) rotate(${Math.random() * 360}deg)`;
+                heart.style.opacity = '0';
+            }, 100);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        setInterval(createHeart, 300);
+
+        // เปลี่ยนหน้า
+        function goToPass() {
+            document.getElementById('gift-page').style.display = 'none';
+            document.getElementById('pass-page').style.display = 'block';
+        }
+
+        function checkPassword() {
+            const pass = document.getElementById('passwordInput').value;
+            // ตั้งรหัสผ่านตรงนี้ (เช่น 1234 หรือวันเริ่มคบ)
+            if (pass === '250269') { 
+                document.getElementById('pass-page').style.display = 'none';
+                document.getElementById('message-page').style.display = 'block';
+            } else {
+                alert('รหัสผ่านไม่ถูกต้อง ❤️');
+            }
+        }
+    </script>
+</body>
+</html>
